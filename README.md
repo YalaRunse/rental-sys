@@ -1,5 +1,7 @@
 # 栖居 · rentalSys 租赁管理系统
 
+[![构建与集成测试](https://github.com/YalaRunse/rental-sys/actions/workflows/verify.yml/badge.svg)](https://github.com/YalaRunse/rental-sys/actions/workflows/verify.yml)
+
 面向 Java 后端岗位的个人学习展示项目。在原 Vue + SSM Demo 基础上，借助 AI 协作完善业务闭环、服务端约束、自动化测试与部署工具。样例均为虚构数据，项目不代表商业运营经验。
 
 ![经营概览](docs/screenshots/dashboard.png)
@@ -101,6 +103,6 @@ erDiagram
 
 ## 已验证与尚未覆盖
 
-2026-10-15 本机：18 项 Java 单元测试、12 项集成测试全部通过；前端在干净容器中 npm ci 与生产构建通过。详见测试报告及保存的证据。仓库包含 CI 配置，但未声称已经在 GitHub 执行。
+2026-10-15 本机与 GitHub Actions：18 项 Java 单元测试、12 项真实接口测试全部通过；前端 npm ci 与生产构建通过。[查看本次云端验证](https://github.com/YalaRunse/rental-sys/actions/runs/38687179034)。详见测试报告及保存的证据。
 
 当前范围是单体本机演示：没有真实支付、退款/退押工作流、按日计租、未来房源预约、合同附件、密码重置、灾备演练或大规模压测。前端仍沿用 Vue CLI，构建有组件库体积和旧工具链提示；Java 11 / Spring 5 技术基线也需在真实上线前规划升级。

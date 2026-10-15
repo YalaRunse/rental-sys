@@ -1,0 +1,74 @@
+{
+  "repository": "YalaRunse/rental-sys",
+  "runId": 38687179034,
+  "commit": "ecbe47769824896c29f3588d75adb2074ad18d59",
+  "branch": "main",
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/YalaRunse/rental-sys/actions/runs/38687179034",
+  "startedAt": "2026-10-15T05:30:48Z",
+  "updatedAt": "2026-10-15T05:32:21Z",
+  "unitTests": 18,
+  "integrationTests": 12,
+  "jobs": [
+    {
+      "id": 116264596678,
+      "name": "verify",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prepare official runtime images",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile, unit test and package with Java 11",
+          "conclusion": "success"
+        },
+        {
+          "name": "Start isolated integration environment",
+          "conclusion": "success"
+        },
+        {
+          "name": "Real HTTP integration tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Frontend clean install and production build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Save test reports",
+          "conclusion": "success"
+        },
+        {
+          "name": "Environment logs and cleanup",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}
