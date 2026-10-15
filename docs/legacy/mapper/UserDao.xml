@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rentalSys.dao.UserDao">
+
+    <resultMap type="com.rentalSys.entity.User" id="UserMap">
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phonenumber" column="phonenumber" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="delFlag" column="del_flag" jdbcType="VARCHAR"/>
+        <result property="loginIp" column="login_ip" jdbcType="VARCHAR"/>
+        <result property="loginDate" column="login_date" jdbcType="TIMESTAMP"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <collection property="roles" ofType="com.rentalSys.entity.Role">
+            <id property="roleId" column="role_id"/>
+            <result property="roleName" column="role_name"/>
+            <result property="roleTag" column="role_tag"/>
+            <collection property="menus" ofType="com.rentalSys.entity.Menu">
+                <id property="menuId" column="menu_id"/>
+                <result property="menuName" column="menu_name"/>
+                <result property="perms" column="perms"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserMap">
+        select user_id, user_name, nick_name, email, phonenumber, avatar, password, status, del_flag, login_ip, login_date, create_by, create_time, update_by, update_time
+        from user
+        where user_id = #{user.userId}
+    </select>
+
+    <!--根据用户名查询-->
+    <select id="queryByUserName" resultMap="UserMap">
+        select user_id, user_name, nick_name, email, phonenumber, avatar, password, status, del_flag, login_ip, login_date, create_by, create_time, update_by, update_time
+        from user
+        where user_name = #{user.userName}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select user_id, user_name, nick_name, email, phonenumber, avatar, password, status, del_flag, login_ip, login_date, create_by, create_time, update_by, update_time
+        from user
+        <where>
+            <if test="user.userId != null">
+                and user_id = #{user.userId}
+            </if>
+            <if test="user.userName != null and user.userName != ''">
+                and user_name like #{user.userName}
+            </if>
+            <if test="user.nickName != null and user.nickName != ''">
+                and nick_name like #{user.nickName}
+            </if>
+            <if test="user.email != null and user.email != ''">
+                and email like #{user.email}
+            </if>
+            <if test="user.phonenumber != null and user.phonenumber != ''">
+                and phonenumber = #{user.phonenumber}
+            </if>
+            <if test="user.avatar != null and user.avatar != ''">
+                and avatar = #{user.avatar}
+            </if>
+            <if test="user.password != null and user.password != ''">
+                and password = #{user.password}
+            </if>
+            <if test="user.status != null and user.status != ''">
+                and status = #{user.status}
+            </if>
+            <if test="user.delFlag != null and user.delFlag != ''">
+                and del_flag = #{user.delFlag}
+            </if>
+            <if test="user.loginIp != null and user.loginIp != ''">
+                and login_ip like #{user.loginIp}
+            </if>
+            <if test="user.loginDate != null">
+                and login_date like #{user.loginDate}
+            </if>
+            <if test="user.createBy != null and user.createBy != ''">
+                and create_by like #{user.createBy}
+            </if>
+            <if test="user.createTime != null">
+                and create_time like #{user.createTime}
+            </if>
+            <if test="user.updateBy != null and user.updateBy != ''">
+                and update_by like #{user.updateBy}
+            </if>
+            <if test="user.updateTime != null">
+                and update_time like #{user.updateTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from user
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="nickName != null and nickName != ''">
+                and nick_name = #{nickName}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phonenumber != null and phonenumber != ''">
+                and phonenumber = #{phonenumber}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="delFlag != null and delFlag != ''">
+                and del_flag = #{delFlag}
+            </if>
+            <if test="loginIp != null and loginIp != ''">
+                and login_ip = #{loginIp}
+            </if>
+            <if test="loginDate != null">
+                and login_date = #{loginDate}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                and create_by = #{createBy}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                and update_by = #{updateBy}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="getInfo" resultMap="UserMap">
+        SELECT
+            u.user_id user_id,
+            user_name,
+            nick_name,
+            r.role_id,
+            r.role_name,
+            r.role_tag,
+            m.menu_id,
+            m.menu_name,
+            m.perms
+        FROM
+            user u
+                LEFT JOIN `user_role` ur ON u.user_id = ur.user_id
+                <!-- 角色过滤放在 JOIN 中，用户没有角色时仍可返回用户和空角色集合。 -->
+                LEFT JOIN role r ON ur.role_id = r.role_id AND r.del_flag = 0
+                LEFT JOIN role_menu rm ON r.role_id = rm.role_id
+                LEFT JOIN menu m ON rm.menu_id = m.menu_id
+        where u.del_flag = 0 and u.user_id = #{userId}
+    </select>
+
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
+        insert into user(user_name, nick_name, email, phonenumber, avatar, password, status, del_flag, login_ip, login_date, create_by, create_time, update_by, update_time)
+        values (#{userName}, #{nickName}, #{email}, #{phonenumber}, #{avatar}, #{password}, #{status}, #{delFlag}, #{loginIp}, #{loginDate}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="userId" useGeneratedKeys="true">
+        insert into user(user_name, nick_name, email, phonenumber, avatar, password, status, del_flag, login_ip, login_date, create_by, create_time, update_by, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.userName}, #{entity.nickName}, #{entity.email}, #{entity.phonenumber}, #{entity.avatar}, #{entity.password}, #{entity.status}, #{entity.delFlag}, #{entity.loginIp}, #{entity.loginDate}, #{entity.createBy}, #{entity.createTime}, #{entity.updateBy}, #{entity.updateTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="userId" useGeneratedKeys="true">
+        insert into user(user_name, nick_name, email, phonenumber, avatar, password, status, del_flag, login_ip, login_date, create_by, create_time, update_by, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.userName}, #{entity.nickName}, #{entity.email}, #{entity.phonenumber}, #{entity.avatar}, #{entity.password}, #{entity.status}, #{entity.delFlag}, #{entity.loginIp}, #{entity.loginDate}, #{entity.createBy}, #{entity.createTime}, #{entity.updateBy}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+user_name = values(user_name),
+nick_name = values(nick_name),
+email = values(email),
+phonenumber = values(phonenumber),
+avatar = values(avatar),
+password = values(password),
+status = values(status),
+del_flag = values(del_flag),
+login_ip = values(login_ip),
+login_date = values(login_date),
+create_by = values(create_by),
+create_time = values(create_time),
+update_by = values(update_by),
+update_time = values(update_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update user
+        <set>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nick_name = #{nickName},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phonenumber != null and phonenumber != ''">
+                phonenumber = #{phonenumber},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="delFlag != null and delFlag != ''">
+                del_flag = #{delFlag},
+            </if>
+            <if test="loginIp != null and loginIp != ''">
+                login_ip = #{loginIp},
+            </if>
+            <if test="loginDate != null">
+                login_date = #{loginDate},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from user where user_id = #{userId}
+    </delete>
+
+
+</mapper>
+

@@ -1,0 +1,26 @@
+[
+  {
+    "service": "backend",
+    "state": "running",
+    "health": "healthy",
+    "ports": "127.0.0.1:8088->8080/tcp"
+  },
+  {
+    "service": "frontend",
+    "state": "running",
+    "health": "healthy",
+    "ports": "127.0.0.1:80->8080/tcp"
+  },
+  {
+    "service": "mysql",
+    "state": "running",
+    "health": "healthy",
+    "ports": "3306/tcp, 33060/tcp"
+  },
+  {
+    "service": "redis",
+    "state": "running",
+    "health": "healthy",
+    "ports": "6379/tcp"
+  }
+]

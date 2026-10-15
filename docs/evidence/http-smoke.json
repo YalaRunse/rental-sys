@@ -1,0 +1,38 @@
+[
+  {
+    "requestId": [
+      "3a3489f7fbee45fe8dc62558fcf98620"
+    ],
+    "name": "backend-health",
+    "status": 200,
+    "checkedAt": "2026-10-15T13:15:47.9836108+08:00"
+  },
+  {
+    "requestId": [
+      "23cced4f15f24c06bb1fb17d0786ac20"
+    ],
+    "name": "same-origin-health",
+    "status": 200,
+    "checkedAt": "2026-10-15T13:15:50.0454138+08:00"
+  },
+  {
+    "requestId": [
+      "f3e3d24397364266aeb3aab4d7373fb6"
+    ],
+    "name": "anonymous-business",
+    "status": 401,
+    "checkedAt": "2026-10-15T13:15:52.0897975+08:00"
+  },
+  {
+    "requestId": null,
+    "name": "spa-route-refresh",
+    "status": 200,
+    "checkedAt": "2026-10-15T13:15:54.1221228+08:00"
+  },
+  {
+    "requestId": null,
+    "name": "favicon",
+    "status": 200,
+    "checkedAt": "2026-10-15T13:15:56.1928920+08:00"
+  }
+]

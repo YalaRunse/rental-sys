@@ -1,0 +1,58 @@
+{
+  "verifiedAt": "2026-10-15T13:15:35.7100699+08:00",
+  "javaSources": 20,
+  "warSha256": "E56CE809CA23DD83892526B0847283535E3CD7445C805CEAA5C6F12A58936BE7",
+  "frontendLockSha256": "358BA33518C02EA8B8A2E4CC484CD80CF9BAFEB7953F31BB64EA22331E09111A",
+  "frontendIndexSha256": "42D326A412458599865AFAABFAB96E53AE5ADFBD6EAB8C340C3D5EBC337919A8",
+  "backendFingerprint": "23EFEA8EE4CA979E05B5FECB208CDBE0BC772E617A7E2C536B835945275DD5DA",
+  "frontendFingerprint": "7E68C860B49F4F982FD170B773401C5C33F3F84499841F8FDD3802BFA36C4E25",
+  "unitTests": 18,
+  "integrationTests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "dependencies": {
+    "vue": "3.5.13",
+    "elementPlus": "2.14.7",
+    "axios": "1.20.0",
+    "vueRouter": "4.6.4",
+    "vuex": "4.1.0"
+  },
+  "images": [
+    {
+      "digests": [
+        "maven@sha256:e63a3f5393c432ab28cb949005a85166ac2db508a36947052bc332b39a67cd35"
+      ],
+      "architecture": "amd64",
+      "tag": "maven:3.10.0-eclipse-temurin-11-noble"
+    },
+    {
+      "digests": [
+        "tomcat@sha256:ca361395110ec6ba5b3d380107afd36bea0657825dc07ce848740f028967e624"
+      ],
+      "architecture": "amd64",
+      "tag": "tomcat:9.0.123-jre11-temurin-noble"
+    },
+    {
+      "digests": [
+        "mysql@sha256:6ea90827b1100f8f2ae306a539f86d2c264a26ed435a2a9f75551dd5c3aeb242"
+      ],
+      "architecture": "amd64",
+      "tag": "mysql:8.4.11"
+    },
+    {
+      "digests": [
+        "redis@sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499"
+      ],
+      "architecture": "amd64",
+      "tag": "redis:7.4.11-alpine"
+    },
+    {
+      "digests": [
+        "node@sha256:8a34c4ab3ea2c5cd194f07e317b2a8f09461d3c8b05c4e34c8ccd56d56024c4d"
+      ],
+      "architecture": "amd64",
+      "tag": "node:22-bookworm"
+    }
+  ]
+}

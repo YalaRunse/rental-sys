@@ -1,0 +1,8 @@
+# 只把已构建前端与部署脚本送入 Docker 构建上下文。
+**/node_modules
+.git
+.local-run
+out
+docs/legacy
+system-admin/target
+**/*.zip

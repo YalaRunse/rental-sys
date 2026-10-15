@@ -1,0 +1,58 @@
+# 本地已验证的构建/测试步骤；此 workflow 尚未在远端执行。
+name: rentalSys build and integration
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: ydl-ui/package-lock.json
+      - name: Prepare official runtime images
+        run: |
+          docker pull maven:3.10.0-eclipse-temurin-11-noble
+          docker pull tomcat:9.0.123-jre11-temurin-noble
+          docker pull mysql:8.4.11
+          docker pull redis:7.4.11-alpine
+      - name: Compile, unit test and package with Java 11
+        run: |
+          docker run --rm -v "$PWD:/workspace" -v rentalsys-ci-m2:/root/.m2 -w /workspace \
+            maven:3.10.0-eclipse-temurin-11-noble mvn -B -ntp clean package
+      - name: Start isolated integration environment
+        env:
+          BACKEND_PORT: '18089'
+        run: docker compose -p rentalsys-qa -f deploy/compose.yaml up -d --wait --wait-timeout 150 mysql redis backend
+      - name: Real HTTP integration tests
+        run: |
+          docker run --rm --network rentalsys-qa_default -v "$PWD:/workspace" -v rentalsys-ci-m2:/root/.m2 -w /workspace \
+            maven:3.10.0-eclipse-temurin-11-noble mvn -B -ntp -pl system-admin -Pintegration \
+            -Dapi.baseUrl=http://backend:8080/admin/api \
+            org.apache.maven.plugins:maven-failsafe-plugin:3.5.2:integration-test \
+            org.apache.maven.plugins:maven-failsafe-plugin:3.5.2:verify
+      - name: Frontend clean install and production build
+        working-directory: ydl-ui
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+      - name: Save test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-test-reports
+          path: |
+            system-admin/target/surefire-reports/
+            system-admin/target/failsafe-reports/
+      - name: Environment logs and cleanup
+        if: always()
+        run: |
+          docker compose -p rentalsys-qa -f deploy/compose.yaml logs --tail 100 backend
+          docker compose -p rentalsys-qa -f deploy/compose.yaml down

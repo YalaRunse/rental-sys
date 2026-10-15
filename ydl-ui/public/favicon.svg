@@ -1,0 +1,2 @@
+<!-- 与侧栏品牌一致的房屋轮廓；矢量图无需额外图片依赖。 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#173f35"/><path d="M13 30 32 14l19 16M20 26v25h24V26M28 51V36h8v15" fill="none" stroke="#dfe9d1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>

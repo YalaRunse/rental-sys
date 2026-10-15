@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mybatis="http://mybatis.org/schema/mybatis-spring" xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd http://mybatis.org/schema/mybatis-spring https://mybatis.org/schema/mybatis-spring.xsd">
+<!-- 只注册完善后的业务模块，历史源码保留在 docs/legacy。 -->
+<context:component-scan base-package="com.rental"/><context:property-placeholder location="classpath:jdbc.properties"/>
+<mvc:annotation-driven/>
+<mvc:interceptors><mvc:interceptor><mvc:mapping path="/api/**"/><mvc:exclude-mapping path="/api/auth/login"/><mvc:exclude-mapping path="/api/health"/><ref bean="authInterceptor"/></mvc:interceptor></mvc:interceptors>
+<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close"><property name="url" value="${url}"/><property name="driverClassName" value="${driverName}"/><property name="username" value="${user}"/><property name="password" value="${password}"/><property name="maxActive" value="16"/><property name="maxWait" value="5000"/></bean>
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"><property name="dataSource" ref="dataSource"/><property name="configuration"><bean class="org.apache.ibatis.session.Configuration"><property name="mapUnderscoreToCamelCase" value="true"/></bean></property></bean>
+<mybatis:scan base-package="com.rental.persistence"/>
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"><property name="dataSource" ref="dataSource"/></bean>
+<!-- 金额、状态与审计写入共享事务。 -->
+<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+<bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="close"><constructor-arg index="0" type="java.lang.String" value="${redisHost}"/><constructor-arg index="1" type="int" value="${redisPort}"/><property name="maxTotal" value="16"/></bean>
+</beans>

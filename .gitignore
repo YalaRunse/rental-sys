@@ -1,0 +1,60 @@
+target/
+# 本机运行状态、备份、旧编译产物和个人 IDE 配置不进入展示源码。
+.local-run/
+out/
+node_modules/
+ydl-ui/dist/
+.idea/
+.env
+!.env.example
+*.log
+*.zip
+# 公共仓库只跟踪 npm 锁文件，旧 Yarn 锁文件保留在本机。
+ydl-ui/yarn.lock
+# 通用私密配置与编辑器临时文件不进入仓库。
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+__pycache__/
+*.pyc
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
